@@ -7,42 +7,23 @@ public class Examples {
 	
 	Examples() {}
 	
-	DataHeap ex1 = new DataHeap(5,
-								new DataHeap(15, 
-										new DataHeap(20, 
-												new MtHeap(), 
-												new MtHeap()), 
-										new MtHeap()),
-								new DataHeap(10, 
-										new DataHeap(30, 
-												new DataHeap(40, 
-														new MtHeap(), 
-														new DataHeap(50, 
-																new MtHeap(), 
-																new MtHeap())), 
-												new MtHeap()), 
-										new DataHeap(25, 
-												new MtHeap(), 
-												new MtHeap())));
-
-	DataHeap ex2 = new DataHeap(10, 
-								new DataHeap(30, 
-										new DataHeap(40, 
-												new MtHeap(), 
-												new DataHeap(50, 
-														new MtHeap(), 
-														new MtHeap())), 
-										new MtHeap()), 
-								new DataHeap(15, 
-										new DataHeap(20, 
-												new MtHeap(), 
-												new MtHeap()),
-										new DataHeap(25, 
-												new MtHeap(), 
-												new MtHeap())));
-	
-	boolean testRemoveMinElt(Tester t){
-		return (t.checkExpect(ex1.removeMinElt().height() == ex2.height(), true) &&
-			   (t.checkExpect(ex1.removeMinElt().findMinElt() == 10, true)));	
-	}
-}
+	DataHeap<MenuItem> lunchMenu= new DataHeap<MenuItem>(new MenuItem("Salad", 10), 
+														 new DataHeap<MenuItem>(new MenuItem("Rice", 13), 
+																 				new DataHeap<MenuItem>(new MenuItem("Chicken", 15), 
+										 												   			   new DataHeap<MenuItem>(new MenuItem("Steak", 16), 
+										 												   					   				  new MtHeap<MenuItem>(), 
+										 												   					   				  new MtHeap<MenuItem>()), 
+										 												   			   new MtHeap<MenuItem>()), 
+																 				new DataHeap<MenuItem>(new MenuItem("Fish", 16), 
+							 												   			   			   new DataHeap<MenuItem>(new MenuItem("Shrimp", 18), 
+							 												   			   					   				  new MtHeap<MenuItem>(), 
+							 												   			   					   				  new MtHeap<MenuItem>()), 
+							 												   			   			   new MtHeap<MenuItem>())), 
+														 new DataHeap<MenuItem>(new MenuItem("Dessert", 14), 
+													 							new DataHeap<MenuItem>(new MenuItem("Chocalate", 16), 
+													 												   new MtHeap<MenuItem>(), 
+													 												   new MtHeap<MenuItem>()), 
+													 							new DataHeap<MenuItem>(new MenuItem("Vanilla", 17), 
+										 												   			   new MtHeap<MenuItem>(), 
+										 												   			   new MtHeap<MenuItem>())));
+}	

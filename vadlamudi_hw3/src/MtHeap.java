@@ -1,35 +1,61 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public class MtHeap implements IHeap{
+public class MtHeap<T extends IObject<T>> implements IHeap<T>{
 
-	int root;
+		
+	public MtHeap(){}
 	
-	public MtHeap(){
-		this.root = 0;
-	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public IHeap addElt(int elt) {
-		return new DataHeap(elt, new MtHeap(), new MtHeap());
+	// Adds the given element to the Activating heap
+	public IHeap<T> addElt(T elt) {
+		return new DataHeap<T>(elt, new MtHeap<T>(), new MtHeap<T>());
 	}
 
-	public int findMinElt() {
-		return this.root;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Finds the smallest element (Root) of the Activation heap; 
+	// MtHeap doesn't have a smallest element as it doesn't have any elements
+	public T findMinElt() {
+		throw new RuntimeException("Shouldn't call findMinElt on MtHeap");
 	}
 
-	public IHeap removeMinElt() throws RuntimeException{
-		 return new MtHeap();
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Removes the smallest element of the Activating heap
+	// MtHeap doesn't have any elements so removing an element doesn't change the Activating heap 
+	public IHeap<T> removeMinElt() throws RuntimeException{
+		 return this;
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Returns the height of the Activating heap
+	// MtHeap doesn't have any elements so the height of the Activating heap is 0
 	public int height() {
 		return 0;
 	}
 
-	public IHeap merge(IHeap heapOne, IHeap heapTwo) throws RuntimeException{
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Returns new heap with the two sub-heaps of the Activating heap merged
+	// MtHeap doesn't contain any sub-heaps so merge shouldn't be called on an MtHeap
+	public IHeap<T> merge(IHeap<T> lefHeap, IHeap<T> rightHeap) throws RuntimeException{
 		throw new RuntimeException("Shouldn't call merge on an MtHeap");
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public IHeap mergeST(IHeap heap){
-		return heap;
+	// Returns the rightHeap if the leftHeap is an MtHeap
+	public IHeap<T> mergeST(IHeap<T> rightHeap){
+		return rightHeap;
+	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Returns the leftHeap is the rightHeap is an MtHeap
+	public IHeap<T> mergeRemST(IHeap<T> leftHeap){
+		return leftHeap;
 	}
 }

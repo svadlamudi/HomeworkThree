@@ -1,35 +1,42 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public class DataHeap implements IHeap{
+public class DataHeap<T extends IObject<T>> implements IHeap<T>{
 
-	int root;
-	IHeap left;
-	IHeap right;
+	// DataHeap Object Fields
+	T root;
+	IHeap<T> left;
+	IHeap<T> right;
 	
-	public DataHeap(int root, IHeap left, IHeap right){
+	// DataHeap Object Constructor
+	public DataHeap(T root, IHeap<T> left, IHeap<T> right){
 		this.root = root;
 		this.left = left;
 		this.right = right;
 	}
 
-	public IHeap addElt(int elt) {
-		if(this.root == elt)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Adds given element to Activation heap
+	public IHeap<T> addElt(T elt) {
+		if(this.root.same(elt))
 			return this;
-		else if(this.root > elt)
-			return new DataHeap(elt, this, new MtHeap());
+		else if(this.root.lessThan(elt))
+			return new DataHeap<T>(this.root, this.left, this.right.addElt(elt));
 		else //if(this.root < elt)
-			return new DataHeap(this.root, this.left.addElt(elt), this.right.addElt(elt));
+			return new DataHeap<T>(elt, this, new MtHeap<T>());
 	}
 
-	public int findMinElt() {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Finds the smallest element (Root) of in the Activating heap
+	public T findMinElt() {
 		return this.root;
 	}
 
-	public IHeap removeMinElt() {
-		return merge(this.left, this.right);
-	}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Returns the height of the Activating heap
 	public int height() {
 		if(this.left.height() > this.right.height())
 			return 1 + this.left.height();
@@ -39,24 +46,55 @@ public class DataHeap implements IHeap{
 			return 1 + this.left.height();
 	}
 
-	public IHeap merge(IHeap heapOne, IHeap heapTwo) {		
-		if(heapOne.findMinElt() < heapTwo.findMinElt())
-			return heapOne.mergeST(heapTwo);
-		else
-			return heapTwo.mergeST(heapOne);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Removes the smallest element (Root) of the Activating heap
+	public IHeap<T> removeMinElt() {
+		return merge(this.left, this.right);
 	}
-
-	public IHeap mergeST(IHeap heap) {
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Merges the two sub-heaps of the Activating heap
+	public IHeap<T> merge(IHeap<T> leftHeap, IHeap<T> rightHeap) {				
+		return leftHeap.mergeST(rightHeap);		
+	}
+	
+	// this -> Left Heap
+	// Returns new Heap with the two sub-heaps merged if both trees are DataHeaps
+	public IHeap<T> mergeST(IHeap<T> rightHeap){
+		return rightHeap.mergeRemST(this);
+	}
+	
+	// Checks the root of which sub-heap is smaller and removes the root from that heap
+	public IHeap<T> mergeRemST(IHeap<T> heap){
 		
-		IHeap ST1 = this.left;
-		IHeap ST2 = ((DataHeap)heap).right;
-		IHeap ST3 = heap;
-			
+		IHeap<T> ST1;
+		IHeap<T> ST2;
+		IHeap<T> ST3;
+		
+		if(this.findMinElt().lessThan(heap.findMinElt())){
+				ST1 = this.left;
+				ST2 = this.right;
+				ST3 = heap;
+				
+				return mergeSTS(ST1, ST2, ST3, this.root);
+		}
+		else{
+				return heap.mergeRemST(this);
+		}
+	}
+	
+	// Creates new heap with the new root and three sub-heaps
+	public IHeap<T> mergeSTS(IHeap<T> ST1, IHeap<T> ST2, IHeap<T> ST3, T newroot){
+		
 		if(ST1.height() >= ST2.height() && ST1.height() >= ST3.height())
-			return new DataHeap(this.root, ST1, merge(ST2, ST3));
+			return new DataHeap<T>(newroot, ST1, merge(ST2, ST3));
+		
 		else if(ST2.height() >= ST1.height() && ST2.height() >= ST3.height())
-			return new DataHeap(this.root, ST2, merge(ST1, ST3));
+			return new DataHeap<T>(newroot, ST2, merge(ST1, ST3));
+		
 		else
-			return new DataHeap(this.root, ST3, merge(ST1, ST2));
+			return new DataHeap<T>(newroot, ST3, merge(ST1, ST2));
 	}
 }
