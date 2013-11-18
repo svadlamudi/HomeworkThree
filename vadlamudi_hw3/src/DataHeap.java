@@ -29,7 +29,7 @@ public class DataHeap<T extends IObject<T>> implements IHeap<T>{
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// Finds the smallest element (Root) of in the Activating heap
+	// Finds the smallest element (Root) of the Activating heap
 	public T findMinElt() {
 		return this.root;
 	}
@@ -43,7 +43,7 @@ public class DataHeap<T extends IObject<T>> implements IHeap<T>{
 		else if(this.left.height() < this.right.height())
 			return 1 + this.right.height();
 		else
-			return 1 + this.left.height();
+			return 1 + this.right.height();
 	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,5 +96,22 @@ public class DataHeap<T extends IObject<T>> implements IHeap<T>{
 		
 		else
 			return new DataHeap<T>(newroot, ST3, merge(ST1, ST2));
+	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Returns true if the Activating heap and parameter heap are equal
+	public boolean areEqual(IHeap<T> that){
+		if(this.height() == 0){
+			return that.height() == 0;
+		}
+		else if(that.height() == 0){
+			return this.height() == 0;
+		}
+		else{
+			return this.root.same(((DataHeap<T>)that).root) &&
+					this.left.areEqual(((DataHeap<T>)that).left) &&
+					this.right.areEqual(((DataHeap<T>)that).right);
+		}
 	}
 }

@@ -23,4 +23,7 @@ public interface IHeap<T extends IObject<T>>{
 	
 	// Checks whether the rightHeap is an MtHeap or DataHeap
 	IHeap<T> mergeRemST(IHeap<T> leftHeap);
+	
+	// Returns true if the Activating heap and the parameter heap are equal
+	boolean areEqual(IHeap<T> that);
 }

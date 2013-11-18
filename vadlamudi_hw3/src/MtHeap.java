@@ -58,4 +58,11 @@ public class MtHeap<T extends IObject<T>> implements IHeap<T>{
 	public IHeap<T> mergeRemST(IHeap<T> leftHeap){
 		return leftHeap;
 	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	// Returns true if the Activating heap and parameter heap are equal
+	public boolean areEqual(IHeap<T> that){
+		return that.height() == 0;
+	}
 }
