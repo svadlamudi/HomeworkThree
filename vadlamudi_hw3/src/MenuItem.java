@@ -1,7 +1,7 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public class MenuItem implements IObject<MenuItem>{
+public class MenuItem implements ISame<MenuItem>{
 
 	// MenuItem Object Fields
 	String name;

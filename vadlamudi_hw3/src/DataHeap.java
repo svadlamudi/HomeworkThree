@@ -1,7 +1,7 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public class DataHeap<T extends IObject<T>> implements IHeap<T>{
+public class DataHeap<T extends ISame<T>> implements IHeap<T>{
 
 	// DataHeap Object Fields
 	T root;
@@ -23,7 +23,7 @@ public class DataHeap<T extends IObject<T>> implements IHeap<T>{
 			return this;
 		else if(this.root.lessThan(elt))
 			return new DataHeap<T>(this.root, this.left, this.right.addElt(elt));
-		else //if(this.root < elt)
+		else //if(this.root > elt)
 			return new DataHeap<T>(elt, this, new MtHeap<T>());
 	}
 
@@ -102,11 +102,11 @@ public class DataHeap<T extends IObject<T>> implements IHeap<T>{
 	
 	// Returns true if the Activating heap and parameter heap are equal
 	public boolean areEqual(IHeap<T> that){
-		if(this.height() == 0){
-			return that.height() == 0;
+		if(this.height() == 1){
+			return that.height() == 1;
 		}
-		else if(that.height() == 0){
-			return this.height() == 0;
+		else if(that.height() == 1){
+			return this.height() == 1;
 		}
 		else{
 			return this.root.same(((DataHeap<T>)that).root) &&

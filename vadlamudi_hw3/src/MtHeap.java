@@ -1,7 +1,7 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public class MtHeap<T extends IObject<T>> implements IHeap<T>{
+public class MtHeap<T extends ISame<T>> implements IHeap<T>{
 
 		
 	public MtHeap(){}
@@ -25,7 +25,7 @@ public class MtHeap<T extends IObject<T>> implements IHeap<T>{
 	
 	// Removes the smallest element of the Activating heap
 	// MtHeap doesn't have any elements so removing an element doesn't change the Activating heap 
-	public IHeap<T> removeMinElt() throws RuntimeException{
+	public IHeap<T> removeMinElt(){
 		 return this;
 	}
 

@@ -1,7 +1,7 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public interface IHeap<T extends IObject<T>>{
+public interface IHeap<T extends ISame<T>>{
 
 	// Adds the given element to the Activating heap
 	IHeap<T> addElt(T elt);

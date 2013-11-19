@@ -85,6 +85,16 @@ public class Examples {
 	
 //////////////////////////////////////////////////////////////////////Tests//////////////////////////////////////////////////////////////////////////////////////
 	
+	boolean testHeight(Tester t){
+		return t.checkExpect(lunchMenu.height() == 4, true) &&
+			   t.checkExpect(lunchMenu.height() == 4, true);
+	}
+	
+	boolean testFindMinElt(Tester t){
+		return t.checkExpect(lunchMenu.findMinElt().same(new MenuItem("Salad", 10)), true) &&
+				t.checkExpect(books.findMinElt().same(new Book("Animal Farm", "Orwell", 5)), true);
+	}
+	
 	boolean testRemoveMinElt(Tester t){
 		return t.checkExpect(lunchMenu.removeMinElt().areEqual(lunchMenuAfter), true)                                   &&
 			   t.checkExpect(lunchMenu.removeMinElt().findMinElt().same(new MenuItem("Rice", 13)), true)                &&

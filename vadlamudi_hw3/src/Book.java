@@ -1,7 +1,7 @@
 // Name: Sai Kiran Vadlamudi		Username: svadlamudi		Section: B01
 // Name: Marilda Bozdo				Username: mbozdo			Section: B06
 
-public class Book implements IObject<Book>{
+public class Book implements ISame<Book>{
 
 	// Book Object Fields
 	String title;
